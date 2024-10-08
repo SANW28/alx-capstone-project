@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import CurrencyDropdown from './CurrencyDropdown';
 import { HiArrowsRightLeft } from 'react-icons/hi2';
 
-/*API endpoints */
-//https://v6.exchangerate-api.com/v6/3cebfc61502c1b34ab0fa6ae/latest/USD
-//https://v6.exchangerate-api.com/v6/3cebfc61502c1b34ab0fa6ae/pair/${fromCurrency}/${toCurrency}/${amount}`        
+/*API endpoints */3
+//https://v6.exchangerate-api.com/v6/b973d55c9b9d75856363a0a2/latest/USD
+//https://v6.exchangerate-api.com/v6/b973d55c9b9d75856363a0a2/pair/${fromCurrency}/${toCurrency}/${amount}`        
 
 const CurrencyConverter = () => {
   const [currencies, setCurrencies]=  useState([]);
@@ -15,7 +15,7 @@ const CurrencyConverter = () => {
   //fetching Api
   const fetchCurrencies = async () => {
     try {
-      const response = await fetch ("https://v6.exchangerate-api.com/v6/3cebfc61502c1b34ab0fa6ae/latest/USD");
+      const response = await fetch ("https://v6.exchangerate-api.com/v6/b973d55c9b9d75856363a0a2/latest/USD");
       //to check if the response is successfull
       if (!response.ok){
         throw new Error (`Oops! Something went wrong: ${response.statusText}`)
@@ -51,7 +51,7 @@ console.log(currencies);
 //conversion logic
 };*/}
 
-
+//swap currencies feature
 
 const swapCurrencies = () => {
   setFromCurrency(toCurrency);
@@ -75,7 +75,8 @@ const swapCurrencies = () => {
           />
           {/*swap currency button*/}
           <div className='flex justify-center -mb-5 sm:mb-0'>
-            <button className='p-2 bg-gray-200 rounded-lg cursor-pointer hover:bg-blue-600' >
+            <button onClick={swapCurrencies}
+            className='p-2 bg-gray-200 rounded-lg cursor-pointer hover:bg-blue-600' >
               < HiArrowsRightLeft className ="text-xl text-gray-700"/>
             </button>
           </div>
