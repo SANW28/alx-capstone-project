@@ -28,8 +28,6 @@ const CurrencyConverter = () => {
       } else {
         throw new Error ("Hmm, the data we received isn't what we expected. Please try again later.")
       }
-      
-
     } catch (error) {
       console.error("Error Fetching Data", error);
     }
@@ -39,6 +37,10 @@ const CurrencyConverter = () => {
     fetchCurrencies()
   },[]);
     console.log (currencies);
+
+
+    
+
 
   //Currency conversion
   const convertCurrency = async() => {
@@ -55,13 +57,13 @@ const CurrencyConverter = () => {
 
 
 
-
-
-
+//swap currencies
 const swapCurrencies = () => {
   setFromCurrency(toCurrency);
   setToCurrency(fromCurrency);
 }
+
+
     
 
   return (
@@ -69,15 +71,17 @@ const swapCurrencies = () => {
       <h2 className='mb-5 text-2xl font-semibold text-gray-700'>
         Currency Converter</h2>
         
+
+        {/*from currency dropdown */}
         <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 items-end'> 
           <CurrencyDropdown  
           currencies={currencies} 
           title='From:'
           currency={fromCurrency}
           setCurrency={setFromCurrency}
-          
-
           />
+
+
           {/*swap currency button*/}
           <div className='flex justify-center -mb-5 sm:mb-0'>
             <button onClick={swapCurrencies}
@@ -86,15 +90,17 @@ const swapCurrencies = () => {
             </button>
           </div>
 
+          {/*to currency dropdown */}
           <CurrencyDropdown 
           currencies={currencies} 
           title='To:'
           currency={toCurrency}
           setCurrency={setToCurrency}
-          
           />
-        </div>
+        </div> 
 
+
+      {/*amount section */}
       <div className='mt-4'>
           <label htmlFor="amount"
           className=' text-sm font-medium text-gray-700'
@@ -106,13 +112,16 @@ const swapCurrencies = () => {
           className='w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600'
           />
         </div> 
-        
+
+
+        {/*convert button */}
         <div className='mt-6 flex justify-end'>
           <button onClick={convertCurrency}
           className='px-5 py-2 bg-blue-700 text-white rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'>
             Convert</button>
         </div>
 
+        {/*converted amount */}
         {convertedAmount && (
           <div className='mt-4 text-lg font-medium text-red-700' >
             <h2> {amount} {fromCurrency} = {convertedAmount} {toCurrency} </h2>
