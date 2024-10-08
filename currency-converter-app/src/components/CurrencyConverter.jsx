@@ -41,28 +41,19 @@ const CurrencyConverter = () => {
     console.log (currencies);
 
   //Currency conversion
-  const convertCurrency = async() => {
-    try {
-      const response = await fetch (`https://v6.exchangerate-api.com/v6/b973d55c9b9d75856363a0a2/pair/${fromCurrency}/${toCurrency}/${amount}`)
-      const data = await response.json();
-      const rate = data.conversion_result.toFixed(2);
-      setConvertedAmount  (rate);
-      
-    } catch (error) {
-      console.error (error);
-    }
+  const convertCurrency = () => {
+
   };
 
-
-  //history rates feature
-  const fetchHistoricalRates = async 
+console.log(currencies);
 
 
+{/*const convertCurrency = () => {
+//conversion logic
+};*/}
 
 
 
-
-    //swap currencies feature
 const swapCurrencies = () => {
   setFromCurrency(toCurrency);
   setToCurrency(fromCurrency);
