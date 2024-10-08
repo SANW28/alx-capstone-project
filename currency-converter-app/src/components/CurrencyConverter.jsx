@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import CurrencyDropdown from './CurrencyDropdown';
 import { HiArrowsRightLeft } from 'react-icons/hi2';
 
-/*API endpoints */3
+/*API endpoints */
 //https://v6.exchangerate-api.com/v6/b973d55c9b9d75856363a0a2/latest/USD
 //https://v6.exchangerate-api.com/v6/b973d55c9b9d75856363a0a2/pair/${fromCurrency}/${toCurrency}/${amount}`        
 
@@ -11,6 +11,7 @@ const CurrencyConverter = () => {
   const [amount, setAmount] = useState (1);
   const [fromCurrency, setFromCurrency] = useState ("USD");
   const [toCurrency, setToCurrency] = useState ("GHS");
+  const [convertedAmount, setConvertedAmount] = useState (null);
 
   //fetching Api
   const fetchCurrencies = async () => {
@@ -40,19 +41,28 @@ const CurrencyConverter = () => {
     console.log (currencies);
 
   //Currency conversion
-  const convertCurrency = () => {
-
+  const convertCurrency = async() => {
+    try {
+      const response = await fetch (`https://v6.exchangerate-api.com/v6/b973d55c9b9d75856363a0a2/pair/${fromCurrency}/${toCurrency}/${amount}`)
+      const data = await response.json();
+      const rate = data.conversion_result.toFixed(2);
+      setConvertedAmount  (rate);
+      
+    } catch (error) {
+      console.error (error);
+    }
   };
 
-console.log(currencies);
+
+  //history rates feature
+  const fetchHistoricalRates = async 
 
 
-{/*const convertCurrency = () => {
-//conversion logic
-};*/}
 
-//swap currencies feature
 
+
+
+    //swap currencies feature
 const swapCurrencies = () => {
   setFromCurrency(toCurrency);
   setToCurrency(fromCurrency);
@@ -107,10 +117,20 @@ const swapCurrencies = () => {
           className='px-5 py-2 bg-blue-700 text-white rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'>
             Convert</button>
         </div>
+
+        {convertedAmount && (
+          <div className='mt-4 text-lg font-medium text-red-700' >
+            <h2> {amount} {fromCurrency} = {convertedAmount} {toCurrency} </h2>
+            
+           </div> 
+        )}
+       
         
-        <div className='mt-4 text-lg font-medium text-red-700' >
-        {/*amount from CurrencyConverter*/}
-        </div>
+        
+        
+
+
+
         </div>
   )
 }
