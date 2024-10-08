@@ -39,7 +39,24 @@ const CurrencyConverter = () => {
   },[]);
     console.log (currencies);
 
+  //Currency conversion
+  const convertCurrency = () => {
 
+  };
+
+console.log(currencies);
+
+
+{/*const convertCurrency = () => {
+//conversion logic
+};*/}
+
+
+
+const swapCurrencies = () => {
+  setFromCurrency(toCurrency);
+  setToCurrency(fromCurrency);
+}
     
 
   return (
