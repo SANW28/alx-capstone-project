@@ -4,6 +4,11 @@ import ConversionResult from './ConversionResult';
 import AmountInput from './AmountInput';
 import { HiArrowsRightLeft } from 'react-icons/hi2';
 
+
+//environment variables
+const apiKey = import.meta.env.VITE_API_KEY;
+const apiUrl = import.meta.env.VITE_API_URL;
+
 /*API endpoints */
 //https://v6.exchangerate-api.com/v6/b973d55c9b9d75856363a0a2/latest/USD
 //https://v6.exchangerate-api.com/v6/b973d55c9b9d75856363a0a2/pair/${fromCurrency}/${toCurrency}/${amount}`        
@@ -19,7 +24,7 @@ const CurrencyConverter = () => {
   //fetching Api
   const fetchCurrencies = async () => {
     try {
-      const response = await fetch ("https://v6.exchangerate-api.com/v6/b973d55c9b9d75856363a0a2/latest/USD");
+      const response = await fetch (`${apiUrl}/${apiKey}/latest/USD`);
       //to check if the response is successfull
       if (!response.ok){
         throw new Error (`Oops! Something went wrong: ${response.statusText}`)
@@ -48,7 +53,7 @@ const CurrencyConverter = () => {
   //Currency conversion
   const convertCurrency = async() => {
     try {
-      const response = await fetch (`https://v6.exchangerate-api.com/v6/b973d55c9b9d75856363a0a2/pair/${fromCurrency}/${toCurrency}/${amount}`)
+      const response = await fetch (`${apiUrl}/${apiKey}/pair/${fromCurrency}/${toCurrency}/${amount}`)
     const data = await response.json();
     const rate = data.conversion_rate;
     setConvertedAmount (rate);
