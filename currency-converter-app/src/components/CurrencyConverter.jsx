@@ -95,8 +95,8 @@ const swapCurrencies = () => {
           {/*swap currency button*/}
           <div className='flex justify-center -mb-5 sm:mb-0'>
             <button onClick={swapCurrencies}
-            className='p-2 bg-gray-200 rounded-lg cursor-pointer hover:bg-blue-600' >
-              Swap Currency{/* < HiOutlineArrowsRightLeft className ="text-xl text-gray-700"/>*/}
+            className='p-2 bg-gray-200 border-x-4 rounded-full cursor-pointer hover:bg-gray-300 hover:border-blue-600 transition duration-300 ease-in-out' >
+              &#8646;
             </button>
           </div>
 
