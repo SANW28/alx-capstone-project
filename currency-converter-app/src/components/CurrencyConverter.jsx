@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import CurrencyDropdown from './CurrencyDropdown';
 import ConversionResult from './ConversionResult';
 import AmountInput from './AmountInput';
-import { HiOutlineArrowsRightLeft } from "react-icons/hi2";
+{/*import { HiOutlineArrowsRightLeft } from "react-icons/hi2";*/}
 
 
 //environment variables
@@ -96,7 +96,7 @@ const swapCurrencies = () => {
           <div className='flex justify-center -mb-5 sm:mb-0'>
             <button onClick={swapCurrencies}
             className='p-2 bg-gray-200 rounded-lg cursor-pointer hover:bg-blue-600' >
-              < HiOutlineArrowsRightLeft className ="text-xl text-gray-700"/>
+              {/* < HiOutlineArrowsRightLeft className ="text-xl text-gray-700"/>*/}
             </button>
           </div>
 
