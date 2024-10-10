@@ -19,12 +19,14 @@ const CurrencyConverter = () => {
   const [fromCurrency, setFromCurrency] = useState ("USD");
   const [toCurrency, setToCurrency] = useState ("GHS");
   const [convertedAmount, setConvertedAmount] = useState (null);
+  const [conversionRate, setConversionRate] = useState(1);
 
 
-  //fetching Api
+  //fetching currencies from Api
   const fetchCurrencies = async () => {
     try {
       const response = await fetch (`${apiUrl}/${apiKey}/latest/USD`);
+
       //to check if the response is successfull
       if (!response.ok){
         throw new Error (`Oops! Something went wrong: ${response.statusText}`)
@@ -41,10 +43,35 @@ const CurrencyConverter = () => {
     }
   };
 
+
+  //fetching conversiom rate
+  const fetchConversionRate = async () => {
+    try {
+      const response = await fetch (`${apiUrl}/${apiKey}/pair/${fromCurrency}/${toCurrency}/${amount}`)
+    const data = await response.json();
+    const currentRate = data.conversion_rate
+    setConversionRate(currentRate);
+    } catch (error) {
+      console.error ("Error during conversion", error);
+      
+    }
+}
+
+
   useEffect (() =>{
     fetchCurrencies()
   },[]);
-    console.log (currencies);
+
+  useEffect(() => {
+  fetchConversionRate();
+  }, [fromCurrency, toCurrency]);
+
+
+    console.log ("Currencies :", currencies);
+    console.log ("Conversion Rate :", conversionRate)
+
+
+    
 
 
     
@@ -59,11 +86,13 @@ const CurrencyConverter = () => {
     setConvertedAmount (rate);
     
     } catch (error) {
-      console.error (error);
+      console.error ( error);
     } 
   };
 
-
+useEffect (() => {
+      setConversionRate();
+},[fromCurrency, toCurrency]);
 
 
 //swap currencies
@@ -120,6 +149,10 @@ const swapCurrencies = () => {
           className='px-5 py-2 bg-blue-700 text-white rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'>
             Convert
             </button>
+        </div>
+
+        <div className='text'>
+          Converion Rate : 1 {fromCurrency} = {conversionRate} {toCurrency}
         </div>
 
 
