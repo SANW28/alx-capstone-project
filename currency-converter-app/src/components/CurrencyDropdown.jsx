@@ -1,6 +1,6 @@
 import React from 'react'
-//passed in the following as props 
 
+//passed in the following as props 
 const CurrencyDropdown = ({
     currencies,
     currency,

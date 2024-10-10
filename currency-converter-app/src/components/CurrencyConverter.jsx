@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import CurrencyDropdown from './CurrencyDropdown';
 import ConversionResult from './ConversionResult';
 import AmountInput from './AmountInput';
-import { HiArrowsRightLeft } from 'react-icons/hi2';
+import { HiArrowRightLeft } from 'react-icons/hi2';
 
 
 //environment variables
