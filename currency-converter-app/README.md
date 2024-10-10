@@ -32,4 +32,4 @@ A simple and intuitive currency converter built with React and Vite. This applic
 The app uses a public API for currency conversion. Make sure to check the API documentation for more details on usage and limitations.
 
 ## Deployment
-The app is deployed on Vercel. You can view it [here](your-vercel-app-url).
+The app is deployed on Vercel. You can view it [here](https://alx-capstone-project-ruby.vercel.app/).

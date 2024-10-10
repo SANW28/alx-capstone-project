@@ -55,7 +55,7 @@ const CurrencyConverter = () => {
     try {
       const response = await fetch (`${apiUrl}/${apiKey}/pair/${fromCurrency}/${toCurrency}/${amount}`)
     const data = await response.json();
-    const rate = data.conversion_rate;
+    const rate = data.conversion_result;
     setConvertedAmount (rate);
     
     } catch (error) {
@@ -96,7 +96,7 @@ const swapCurrencies = () => {
           <div className='flex justify-center -mb-5 sm:mb-0'>
             <button onClick={swapCurrencies}
             className='p-2 bg-gray-200 rounded-lg cursor-pointer hover:bg-blue-600' >
-              {/* < HiOutlineArrowsRightLeft className ="text-xl text-gray-700"/>*/}
+              Swap Currency{/* < HiOutlineArrowsRightLeft className ="text-xl text-gray-700"/>*/}
             </button>
           </div>
 
