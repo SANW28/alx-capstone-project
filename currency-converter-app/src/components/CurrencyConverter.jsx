@@ -20,6 +20,7 @@ const CurrencyConverter = () => {
   const [toCurrency, setToCurrency] = useState ("GHS");
   const [convertedAmount, setConvertedAmount] = useState (null);
   const [conversionRate, setConversionRate] = useState(1);
+  const [errorMessage, setErrorMessage] = useState("");
 
 
   //fetching currencies from Api
@@ -46,19 +47,28 @@ const CurrencyConverter = () => {
 
   //fetching conversiom rate
   const fetchConversionRate = async () => {
+    if (fromCurrency === toCurrency){
+      setErrorMessage ("From and To currencies cannot be the same");
+    return;
+    }
+
     try {
       const response = await fetch (`${apiUrl}/${apiKey}/pair/${fromCurrency}/${toCurrency}/${amount}`)
+      if (!response.ok){
+        throw new Error (`Conversion API error: ${response.statusText}`)
+      }
     const data = await response.json();
     const currentRate = data.conversion_rate
     setConversionRate(currentRate);
+    setErrorMessage ("")
     } catch (error) {
       console.error ("Error during conversion", error);
+      setErrorMessage ("Failed to fetch conversion rates");
       
     }
 }
 
-
-  useEffect (() =>{
+useEffect (() =>{
     fetchCurrencies()
   },[]);
 
@@ -79,20 +89,29 @@ const CurrencyConverter = () => {
 
   //Currency conversion
   const convertCurrency = async() => {
+    if(!amount || amount <= 0) {
+      setErrorMessage ("Please enter a valid amount");
+      return;
+    }
     try {
       const response = await fetch (`${apiUrl}/${apiKey}/pair/${fromCurrency}/${toCurrency}/${amount}`)
     const data = await response.json();
     const rate = data.conversion_result;
     setConvertedAmount (rate);
-    
+    setErrorMessage("")
     } catch (error) {
-      console.error ( error);
+      console.error ( "Error during conversion",error);
+      setErrorMessage("Coversion failed")
     } 
   };
 
 useEffect (() => {
       setConversionRate();
 },[fromCurrency, toCurrency]);
+
+
+
+
 
 
 //swap currencies
@@ -109,7 +128,10 @@ const swapCurrencies = () => {
         <h2 className='mb-5 text-2xl font-semibold text-gray-700'>
             Currency Converter
         </h2>
-        
+
+        <div className='m-6 text-center font-semibold'>
+          Converion Rate : 1 {fromCurrency} = {conversionRate} {toCurrency}
+        </div> 
 
         {/*from currency dropdown */}
         <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 items-end'> 
@@ -151,9 +173,7 @@ const swapCurrencies = () => {
             </button>
         </div>
 
-        <div className='text'>
-          Converion Rate : 1 {fromCurrency} = {conversionRate} {toCurrency}
-        </div>
+       
 
 
         {/*converted amount */}
@@ -163,7 +183,7 @@ const swapCurrencies = () => {
            fromCurrency={fromCurrency}
            toCurrency={toCurrency}
            /> 
-            
+           {errorMessage && <p className='mt-2 text-center font-black'>{errorMessage}</p>} 
       
 
         </div>
