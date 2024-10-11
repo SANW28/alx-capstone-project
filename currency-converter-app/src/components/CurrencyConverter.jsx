@@ -183,7 +183,7 @@ const swapCurrencies = () => {
            fromCurrency={fromCurrency}
            toCurrency={toCurrency}
            /> 
-           {errorMessage && <p className='mt-2 text-center font-black'>{errorMessage}</p>} 
+           {errorMessage && <p className='mt-2 text-center font-black text-red-700'>{errorMessage}</p>} 
       
 
         </div>
